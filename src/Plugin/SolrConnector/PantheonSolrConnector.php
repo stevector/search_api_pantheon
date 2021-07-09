@@ -7,9 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\search_api_pantheon\SchemaPoster;
 use Solarium\Client;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use RegexIterator;
 
 /**
  * Standard Solr connector.
@@ -91,9 +88,9 @@ class PantheonSolrConnector extends StandardSolrConnector {
    */
   public function findSchemaFiles() {
     $return = [];
-    $directory = new RecursiveDirectoryIterator('modules');
-    $flattened = new RecursiveIteratorIterator($directory);
-    $files = new RegexIterator($flattened, '/schema.xml$/');
+    $directory = new \RecursiveDirectoryIterator('modules');
+    $flattened = new \RecursiveIteratorIterator($directory);
+    $files = new \RegexIterator($flattened, '/schema.xml$/');
 
     foreach ($files as $file) {
       $relative_path = str_replace(DRUPAL_ROOT . '/', '', $file->getRealPath());
